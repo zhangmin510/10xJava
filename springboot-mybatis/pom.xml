@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>name.zhangmin.java</groupId>
+	<artifactId>springboot-mybatis</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+	<name>springboot-mybatic</name>
+	<description>springboot mybatis example</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.2.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<mybatis.starter.version>1.3.2</mybatis.starter.version>
+		<druid.version>1.1.9</druid.version>
+		<druid.starter.version>1.1.9</druid.starter.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis.starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- alibaba的druid数据库连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid.starter.version}</version>
+		</dependency>
+		<!-- alibaba的druid数据库连接池 -->
+
+
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>repo</id>
+			<name>Netease Maven Repository</name>
+			<url>http://mvn.hz.netease.com/artifactory/libs-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Netease Maven Repository-snapshots</name>
+			<url>http://mvn.hz.netease.com/artifactory/libs-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>repo</name>
+			<url>http://mvn.hz.netease.com/artifactory/repo</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>maven</id>
+			<name>Slowly offical site</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
+
+
+</project>
