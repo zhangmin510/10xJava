@@ -4,7 +4,7 @@ server:
 spring:
     datasource:
         name: mysql-local 
-        url: jdbc:mysql://127.0.0.1:3306/bde?useUnicode=true&useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true
+        url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true
         username: root
         password: root
         # 使用druid数据源
@@ -13,4 +13,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.netease.bima.btm.model
+  type-aliases-package: name.zhangmin.boot.model
