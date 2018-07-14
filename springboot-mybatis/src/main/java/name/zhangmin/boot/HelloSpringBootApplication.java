@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("name.zhangmin.boot.dao")
-public class BtmSpringBootApplication {
+public class HelloSpringBootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BtmSpringBootApplication.class, args);
+		SpringApplication.run(HelloSpringBootApplication.class, args);
 	}
 }
