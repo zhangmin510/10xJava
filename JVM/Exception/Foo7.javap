@@ -1,0 +1,186 @@
+Classfile /Users/zhangmin/GitRepo/10xJava/JVM/Exception/Foo7.class
+  Last modified Oct 2, 2018; size 928 bytes
+  MD5 checksum 1026dc327bc9a550af41e8e5aa73e62e
+  Compiled from "Foo7.java"
+public class Foo7 implements java.lang.AutoCloseable
+  minor version: 0
+  major version: 55
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #5                          // Foo7
+  super_class: #14                        // java/lang/Object
+  interfaces: 1, fields: 1, methods: 3, attributes: 1
+Constant pool:
+   #1 = Methodref          #14.#30        // java/lang/Object."<init>":()V
+   #2 = Fieldref           #5.#31         // Foo7.name:Ljava/lang/String;
+   #3 = Class              #32            // java/lang/RuntimeException
+   #4 = Methodref          #3.#33         // java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+   #5 = Class              #34            // Foo7
+   #6 = String             #35            // Foo0
+   #7 = Methodref          #5.#33         // Foo7."<init>":(Ljava/lang/String;)V
+   #8 = String             #36            // Foo1
+   #9 = String             #37            // Foo2
+  #10 = String             #38            // Initial
+  #11 = Class              #39            // java/lang/Throwable
+  #12 = Methodref          #5.#40         // Foo7.close:()V
+  #13 = Methodref          #11.#41        // java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+  #14 = Class              #42            // java/lang/Object
+  #15 = Class              #43            // java/lang/AutoCloseable
+  #16 = Utf8               name
+  #17 = Utf8               Ljava/lang/String;
+  #18 = Utf8               <init>
+  #19 = Utf8               (Ljava/lang/String;)V
+  #20 = Utf8               Code
+  #21 = Utf8               LineNumberTable
+  #22 = Utf8               close
+  #23 = Utf8               ()V
+  #24 = Utf8               main
+  #25 = Utf8               ([Ljava/lang/String;)V
+  #26 = Utf8               StackMapTable
+  #27 = Class              #44            // "[Ljava/lang/String;"
+  #28 = Utf8               SourceFile
+  #29 = Utf8               Foo7.java
+  #30 = NameAndType        #18:#23        // "<init>":()V
+  #31 = NameAndType        #16:#17        // name:Ljava/lang/String;
+  #32 = Utf8               java/lang/RuntimeException
+  #33 = NameAndType        #18:#19        // "<init>":(Ljava/lang/String;)V
+  #34 = Utf8               Foo7
+  #35 = Utf8               Foo0
+  #36 = Utf8               Foo1
+  #37 = Utf8               Foo2
+  #38 = Utf8               Initial
+  #39 = Utf8               java/lang/Throwable
+  #40 = NameAndType        #22:#23        // close:()V
+  #41 = NameAndType        #45:#46        // addSuppressed:(Ljava/lang/Throwable;)V
+  #42 = Utf8               java/lang/Object
+  #43 = Utf8               java/lang/AutoCloseable
+  #44 = Utf8               [Ljava/lang/String;
+  #45 = Utf8               addSuppressed
+  #46 = Utf8               (Ljava/lang/Throwable;)V
+{
+  public Foo7(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #2                  // Field name:Ljava/lang/String;
+         9: return
+      LineNumberTable:
+        line 3: 0
+
+  public void close();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: new           #3                  // class java/lang/RuntimeException
+         3: dup
+         4: aload_0
+         5: getfield      #2                  // Field name:Ljava/lang/String;
+         8: invokespecial #4                  // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+        11: athrow
+      LineNumberTable:
+        line 7: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=6, args_size=1
+         0: new           #5                  // class Foo7
+         3: dup
+         4: ldc           #6                  // String Foo0
+         6: invokespecial #7                  // Method "<init>":(Ljava/lang/String;)V
+         9: astore_1
+        10: new           #5                  // class Foo7
+        13: dup
+        14: ldc           #8                  // String Foo1
+        16: invokespecial #7                  // Method "<init>":(Ljava/lang/String;)V
+        19: astore_2
+        20: new           #5                  // class Foo7
+        23: dup
+        24: ldc           #9                  // String Foo2
+        26: invokespecial #7                  // Method "<init>":(Ljava/lang/String;)V
+        29: astore_3
+        30: new           #3                  // class java/lang/RuntimeException
+        33: dup
+        34: ldc           #10                 // String Initial
+        36: invokespecial #4                  // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+        39: athrow
+        40: astore        4
+        42: aload_3
+        43: invokevirtual #12                 // Method close:()V
+        46: goto          58
+        49: astore        5
+        51: aload         4
+        53: aload         5
+        55: invokevirtual #13                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        58: aload         4
+        60: athrow
+        61: astore_3
+        62: aload_2
+        63: invokevirtual #12                 // Method close:()V
+        66: goto          77
+        69: astore        4
+        71: aload_3
+        72: aload         4
+        74: invokevirtual #13                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        77: aload_3
+        78: athrow
+        79: astore_2
+        80: aload_1
+        81: invokevirtual #12                 // Method close:()V
+        84: goto          93
+        87: astore_3
+        88: aload_2
+        89: aload_3
+        90: invokevirtual #13                 // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        93: aload_2
+        94: athrow
+      Exception table:
+         from    to  target type
+            30    40    40   Class java/lang/Throwable
+            42    46    49   Class java/lang/Throwable
+            20    61    61   Class java/lang/Throwable
+            62    66    69   Class java/lang/Throwable
+            10    79    79   Class java/lang/Throwable
+            80    84    87   Class java/lang/Throwable
+      LineNumberTable:
+        line 12: 0
+        line 13: 10
+        line 14: 20
+        line 16: 30
+        line 11: 40
+      StackMapTable: number_of_entries = 9
+        frame_type = 255 /* full_frame */
+          offset_delta = 40
+          locals = [ class "[Ljava/lang/String;", class Foo7, class Foo7, class Foo7 ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 8
+          locals = [ class "[Ljava/lang/String;", class Foo7, class Foo7, class Foo7, class java/lang/Throwable ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 8 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class "[Ljava/lang/String;", class Foo7, class Foo7 ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 7
+          locals = [ class "[Ljava/lang/String;", class Foo7, class Foo7, class java/lang/Throwable ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 7 /* same */
+        frame_type = 255 /* full_frame */
+          offset_delta = 1
+          locals = [ class "[Ljava/lang/String;", class Foo7 ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 7
+          locals = [ class "[Ljava/lang/String;", class Foo7, class java/lang/Throwable ]
+          stack = [ class java/lang/Throwable ]
+        frame_type = 5 /* same */
+}
+SourceFile: "Foo7.java"

@@ -1,0 +1,140 @@
+Classfile /Users/zhangmin/GitRepo/10xJava/JVM/HowMethodInvoke/TestInline.class
+  Last modified Oct 2, 2018; size 708 bytes
+  MD5 checksum 30ad91ce1daa5f0272bcd14114cd007a
+  Compiled from "TestInline.java"
+class TestInline
+  minor version: 0
+  major version: 52
+  flags: ACC_SUPER
+Constant pool:
+   #1 = Methodref          #14.#26        // java/lang/Object."<init>":()V
+   #2 = Class              #27            // Chinese
+   #3 = Methodref          #2.#26         // Chinese."<init>":()V
+   #4 = Class              #28            // Foreigner
+   #5 = Methodref          #4.#26         // Foreigner."<init>":()V
+   #6 = Methodref          #29.#30        // java/lang/System.currentTimeMillis:()J
+   #7 = Integer            2000000000
+   #8 = Integer            100000000
+   #9 = Fieldref           #29.#31        // java/lang/System.out:Ljava/io/PrintStream;
+  #10 = Methodref          #32.#33        // java/io/PrintStream.println:(J)V
+  #11 = Integer            1000000000
+  #12 = Methodref          #34.#35        // Passenger.outbound:()V
+  #13 = Class              #36            // TestInline
+  #14 = Class              #37            // java/lang/Object
+  #15 = Utf8               <init>
+  #16 = Utf8               ()V
+  #17 = Utf8               Code
+  #18 = Utf8               LineNumberTable
+  #19 = Utf8               main
+  #20 = Utf8               ([Ljava/lang/String;)V
+  #21 = Utf8               StackMapTable
+  #22 = Class              #38            // "[Ljava/lang/String;"
+  #23 = Class              #39            // Passenger
+  #24 = Utf8               SourceFile
+  #25 = Utf8               TestInline.java
+  #26 = NameAndType        #15:#16        // "<init>":()V
+  #27 = Utf8               Chinese
+  #28 = Utf8               Foreigner
+  #29 = Class              #40            // java/lang/System
+  #30 = NameAndType        #41:#42        // currentTimeMillis:()J
+  #31 = NameAndType        #43:#44        // out:Ljava/io/PrintStream;
+  #32 = Class              #45            // java/io/PrintStream
+  #33 = NameAndType        #46:#47        // println:(J)V
+  #34 = Class              #39            // Passenger
+  #35 = NameAndType        #48:#16        // outbound:()V
+  #36 = Utf8               TestInline
+  #37 = Utf8               java/lang/Object
+  #38 = Utf8               [Ljava/lang/String;
+  #39 = Utf8               Passenger
+  #40 = Utf8               java/lang/System
+  #41 = Utf8               currentTimeMillis
+  #42 = Utf8               ()J
+  #43 = Utf8               out
+  #44 = Utf8               Ljava/io/PrintStream;
+  #45 = Utf8               java/io/PrintStream
+  #46 = Utf8               println
+  #47 = Utf8               (J)V
+  #48 = Utf8               outbound
+{
+  TestInline();
+    descriptor: ()V
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=5, locals=8, args_size=1
+         0: new           #2                  // class Chinese
+         3: dup
+         4: invokespecial #3                  // Method Chinese."<init>":()V
+         7: astore_1
+         8: new           #4                  // class Foreigner
+        11: dup
+        12: invokespecial #5                  // Method Foreigner."<init>":()V
+        15: astore_2
+        16: invokestatic  #6                  // Method java/lang/System.currentTimeMillis:()J
+        19: lstore_3
+        20: iconst_1
+        21: istore        5
+        23: iload         5
+        25: ldc           #7                  // int 2000000000
+        27: if_icmpgt     81
+        30: iload         5
+        32: ldc           #8                  // int 100000000
+        34: irem
+        35: ifne          56
+        38: invokestatic  #6                  // Method java/lang/System.currentTimeMillis:()J
+        41: lstore        6
+        43: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        46: lload         6
+        48: lload_3
+        49: lsub
+        50: invokevirtual #10                 // Method java/io/PrintStream.println:(J)V
+        53: lload         6
+        55: lstore_3
+        56: iload         5
+        58: ldc           #11                 // int 1000000000
+        60: if_icmpge     67
+        63: aload_1
+        64: goto          68
+        67: aload_2
+        68: astore        6
+        70: aload         6
+        72: invokevirtual #12                 // Method Passenger.outbound:()V
+        75: iinc          5, 1
+        78: goto          23
+        81: return
+      LineNumberTable:
+        line 3: 0
+        line 4: 8
+        line 5: 16
+        line 6: 20
+        line 7: 30
+        line 8: 38
+        line 9: 43
+        line 10: 53
+        line 12: 56
+        line 13: 70
+        line 6: 75
+        line 15: 81
+      StackMapTable: number_of_entries = 5
+        frame_type = 255 /* full_frame */
+          offset_delta = 23
+          locals = [ class "[Ljava/lang/String;", class Passenger, class Passenger, long, int ]
+          stack = []
+        frame_type = 32 /* same */
+        frame_type = 10 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ class Passenger ]
+        frame_type = 250 /* chop */
+          offset_delta = 12
+}
+SourceFile: "TestInline.java"

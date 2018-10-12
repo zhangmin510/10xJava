@@ -25,7 +25,7 @@ public class AsyncController {
             @Override
             public String call() throws Exception {
                 Thread.sleep(1000);
-                return "hello";
+                return "async";
             }
         };
     }

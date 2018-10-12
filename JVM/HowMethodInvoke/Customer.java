@@ -1,0 +1,3 @@
+interface Customer {
+    boolean isVIP();
+}

@@ -1,0 +1,96 @@
+Classfile /Users/zhangmin/GitRepo/10xJava/JVM/HowMethodInvoke/BadMerchant.class
+  Last modified Oct 2, 2018; size 506 bytes
+  MD5 checksum dbce13ddbe3229f253d097528822e02c
+  Compiled from "BadMerchant.java"
+class BadMerchant extends Merchant
+  minor version: 0
+  major version: 52
+  flags: ACC_SUPER
+Constant pool:
+   #1 = Methodref          #11.#23        // Merchant."<init>":()V
+   #2 = InterfaceMethodref #24.#25        // Customer.isVIP:()Z
+   #3 = Methodref          #10.#26        // BadMerchant.discrimination:()D
+   #4 = Methodref          #11.#27        // Merchant.discount:(DLCustomer;)D
+   #5 = Class              #28            // java/util/Random
+   #6 = Methodref          #5.#23         // java/util/Random."<init>":()V
+   #7 = Methodref          #5.#29         // java/util/Random.nextDouble:()D
+   #8 = Double             0.8d
+  #10 = Class              #30            // BadMerchant
+  #11 = Class              #31            // Merchant
+  #12 = Utf8               <init>
+  #13 = Utf8               ()V
+  #14 = Utf8               Code
+  #15 = Utf8               LineNumberTable
+  #16 = Utf8               discount
+  #17 = Utf8               (DLCustomer;)D
+  #18 = Utf8               StackMapTable
+  #19 = Utf8               discrimination
+  #20 = Utf8               ()D
+  #21 = Utf8               SourceFile
+  #22 = Utf8               BadMerchant.java
+  #23 = NameAndType        #12:#13        // "<init>":()V
+  #24 = Class              #32            // Customer
+  #25 = NameAndType        #33:#34        // isVIP:()Z
+  #26 = NameAndType        #19:#20        // discrimination:()D
+  #27 = NameAndType        #16:#17        // discount:(DLCustomer;)D
+  #28 = Utf8               java/util/Random
+  #29 = NameAndType        #35:#20        // nextDouble:()D
+  #30 = Utf8               BadMerchant
+  #31 = Utf8               Merchant
+  #32 = Utf8               Customer
+  #33 = Utf8               isVIP
+  #34 = Utf8               ()Z
+  #35 = Utf8               nextDouble
+{
+  BadMerchant();
+    descriptor: ()V
+    flags:
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method Merchant."<init>":()V
+         4: return
+      LineNumberTable:
+        line 2: 0
+
+  public double discount(double, Customer);
+    descriptor: (DLCustomer;)D
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=4, args_size=3
+         0: aload_3
+         1: invokeinterface #2,  1            // InterfaceMethod Customer.isVIP:()Z
+         6: ifeq          15
+         9: dload_1
+        10: invokestatic  #3                  // Method discrimination:()D
+        13: dmul
+        14: dreturn
+        15: aload_0
+        16: dload_1
+        17: aload_3
+        18: invokespecial #4                  // Method Merchant.discount:(DLCustomer;)D
+        21: dreturn
+      LineNumberTable:
+        line 5: 0
+        line 6: 9
+        line 8: 15
+      StackMapTable: number_of_entries = 1
+        frame_type = 15 /* same */
+
+  public static double discrimination();
+    descriptor: ()D
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: new           #5                  // class java/util/Random
+         3: dup
+         4: invokespecial #6                  // Method java/util/Random."<init>":()V
+         7: invokevirtual #7                  // Method java/util/Random.nextDouble:()D
+        10: ldc2_w        #8                  // double 0.8d
+        13: dadd
+        14: dreturn
+      LineNumberTable:
+        line 13: 0
+        line 14: 7
+}
+SourceFile: "BadMerchant.java"

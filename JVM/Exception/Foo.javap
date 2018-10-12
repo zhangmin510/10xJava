@@ -1,0 +1,110 @@
+Classfile /Users/zhangmin/GitRepo/10xJava/JVM/Exception/Foo.class
+  Last modified Oct 2, 2018; size 541 bytes
+  MD5 checksum e27bf4c002e9e4365f2538c0cb6e730a
+  Compiled from "Foo.java"
+public class Foo
+  minor version: 0
+  major version: 55
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #7                          // Foo
+  super_class: #8                         // java/lang/Object
+  interfaces: 0, fields: 4, methods: 2, attributes: 1
+Constant pool:
+   #1 = Methodref          #8.#23         // java/lang/Object."<init>":()V
+   #2 = Fieldref           #7.#24         // Foo.tryBlock:I
+   #3 = Fieldref           #7.#25         // Foo.finallyBlock:I
+   #4 = Class              #26            // java/lang/Exception
+   #5 = Fieldref           #7.#27         // Foo.catchBlock:I
+   #6 = Fieldref           #7.#28         // Foo.methodExit:I
+   #7 = Class              #29            // Foo
+   #8 = Class              #30            // java/lang/Object
+   #9 = Utf8               tryBlock
+  #10 = Utf8               I
+  #11 = Utf8               catchBlock
+  #12 = Utf8               finallyBlock
+  #13 = Utf8               methodExit
+  #14 = Utf8               <init>
+  #15 = Utf8               ()V
+  #16 = Utf8               Code
+  #17 = Utf8               LineNumberTable
+  #18 = Utf8               test
+  #19 = Utf8               StackMapTable
+  #20 = Class              #31            // java/lang/Throwable
+  #21 = Utf8               SourceFile
+  #22 = Utf8               Foo.java
+  #23 = NameAndType        #14:#15        // "<init>":()V
+  #24 = NameAndType        #9:#10         // tryBlock:I
+  #25 = NameAndType        #12:#10        // finallyBlock:I
+  #26 = Utf8               java/lang/Exception
+  #27 = NameAndType        #11:#10        // catchBlock:I
+  #28 = NameAndType        #13:#10        // methodExit:I
+  #29 = Utf8               Foo
+  #30 = Utf8               java/lang/Object
+  #31 = Utf8               java/lang/Throwable
+{
+  public Foo();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
+
+  public void test();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: aload_0
+         1: iconst_0
+         2: putfield      #2                  // Field tryBlock:I
+         5: aload_0
+         6: iconst_2
+         7: putfield      #3                  // Field finallyBlock:I
+        10: goto          35
+        13: astore_1
+        14: aload_0
+        15: iconst_1
+        16: putfield      #5                  // Field catchBlock:I
+        19: aload_0
+        20: iconst_2
+        21: putfield      #3                  // Field finallyBlock:I
+        24: goto          35
+        27: astore_2
+        28: aload_0
+        29: iconst_2
+        30: putfield      #3                  // Field finallyBlock:I
+        33: aload_2
+        34: athrow
+        35: aload_0
+        36: iconst_3
+        37: putfield      #6                  // Field methodExit:I
+        40: return
+      Exception table:
+         from    to  target type
+             0     5    13   Class java/lang/Exception
+             0     5    27   any
+            13    19    27   any
+      LineNumberTable:
+        line 9: 0
+        line 13: 5
+        line 14: 10
+        line 10: 13
+        line 11: 14
+        line 13: 19
+        line 14: 24
+        line 13: 27
+        line 14: 33
+        line 15: 35
+        line 16: 40
+      StackMapTable: number_of_entries = 3
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Exception ]
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Throwable ]
+        frame_type = 7 /* same */
+}
+SourceFile: "Foo.java"
