@@ -1,4 +1,4 @@
-package name.zhangmin.java.playground;
+package name.zhangmin.playground;
 
 import java.math.BigInteger;
 

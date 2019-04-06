@@ -26,3 +26,9 @@ hs_err_pid*
 .project
 .settings/
 
+# idea
+.idea/
+
+# target
+*.class
+target

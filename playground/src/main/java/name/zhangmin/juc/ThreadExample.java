@@ -1,4 +1,4 @@
- package name.zhangmin.java.juc;
+ package name.zhangmin.juc;
 
  /**
  * @author hzzhangmin15

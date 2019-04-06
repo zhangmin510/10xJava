@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - LoopPerformanceTest",
+            "request": "launch",
+            "mainClass": "LoopPerformanceTest"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - TestInine",
             "request": "launch",
             "cwd": "${workspaceFolder}",

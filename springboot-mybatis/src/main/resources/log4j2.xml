@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Log4j2 config test -->
+<!-- 日志8个级别优先级 All < Trace < Debug < Info < Warn < Error < Fatal < OFF -->
+<!-- All:最低等级的，用于打开所有日志记录.
+    Trace:是追踪，就是程序推进以下，你就可以写个trace输出，所以trace应该会特别多，不过没关系，我们可以设置最低日志级别不让他输出.
+    Debug:指出细粒度信息事件对调试应用程序是非常有帮助的.
+    Info:消息在粗粒度级别上突出强调应用程序的运行过程.
+    Warn:输出警告及warn以下级别的日志.
+    Error:输出错误信息日志.
+    Fatal:输出每个严重的错误事件将会导致应用程序的退出的日志.
+    OFF:最高等级的，用于关闭所有日志记录.
+    -->
+<Configuration schema="Log4J-V2.2.xsd" status="warn">
+
+    <!--定义参数属性-->
+    <Properties>
+        <!--应用名-->
+        <Property name="com.cmdb.appname" value="demo"/>
+        <!--集群名-->
+        <Property name="com.cmdb.clustername" value="demo"/>
+        <!--根日志等级-->
+        <Property name="root.level" value="debug"/>
+
+        <Property name="mlog.error" value="btm_error"/>
+        <Property name="mlog.dir" value="logs/"/>
+        <Property name="mlog.file" value="${mlog.dir}/${sys:com.cmdb.appname}.log"/>
+        <Property name="mlog.version" value="v1"/>
+        <Property name="mlog.error.file" value="${mlog.dir}/${sys:com.cmdb.appname}-error.log"/>
+        <Property name="mlog.schedule.file" value="${mlog.dir}/${sys:com.cmdb.appname}-schedule.log"/>
+        <Property name="mlog.date.pattern" value=".%d{yyyy-MM-dd}.%i"/>
+        <!--info日志超过value大小就打包日志，产生的打包日志路径格式参考：mlog.info.file.pattern-->
+        <Property name="mlog.file.size" value="1GB"/>
+        <!--当前日志只能放value个，超过这个数会删除老的包-->
+        <Property name="mlog.file.count" value="30"/>
+        <Property name="mlog.error.file.size" value="1GB"/>
+        <Property name="mlog.error.file.count" value="30"/>
+        <!--将日志打包时，打包日志文件产生的 路径格式-->
+        <Property name="mlog.info.file.pattern">${mlog.dir}/$${date:yyyy-MM}/${sys:com.cmdb.appname}${mlog.date.pattern}.log.gz</Property>
+        <Property name="mlog.error.file.pattern">${mlog.dir}/$${date:yyyy-MM}/${sys:mlog.error}${mlog.date.pattern}.log.gz</Property>
+        <Property name="mlog.schedule.file.pattern">${mlog.dir}/$${date:yyyy-MM}/schedule${mlog.date.pattern}.log.gz</Property>
+
+        <!--used for console-->
+        <Property name="PID">????</Property>
+        <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
+        <Property name="LOG_LEVEL_PATTERN">%5p</Property>
+        <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{${LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${LOG_LEVEL_PATTERN}} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} [requestId: %X{requestId}] %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+        <!--日志输出内容的样式-->
+        <Property name="FILE_LOG_PATTERN">%d{${LOG_DATEFORMAT_PATTERN}} ${LOG_LEVEL_PATTERN} ${sys:PID} --- [%t] [requestId: %X{requestId}] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+        <Property name="KAFKA_LOG_PATTERN">%d{${LOG_DATEFORMAT_PATTERN}} %msg%n</Property>
+    </Properties>
+
+    <!-- 定义输出的appender,常见的有三种子节点:Console、RollingFile、File. -->
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
+            <!-- 输出样式格式 -->
+            <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}" />
+
+        </Console>
+
+        <!-- 业务日志文件，按天或者按照大小分割 -->
+        <!--
+            fileName:指定输出日志的目的文件带全路径的文件名.
+            filePattern:由Policies触发，比如时间或者日志文件大小 触发将fileName的日志打包生成 打包文件，filename的日志再清空处理当前的
+            PatternLayout:输出格式，不设置默认为:%m%n.
+            -->
+        <RollingFile fileName="${mlog.file}" filePattern="${mlog.info.file.pattern}" name="mlog">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <!--过滤器，执行一个过滤器会有返回个枚举值，即DENY，NEUTRAL，ACCEPT其中之一。返回DENY，日志将立即被抛弃不再经过其他过滤器；返回NEUTRAL，有序列表里的下个过滤器过接着处理日志；返回ACCEPT，日志会被立即处理，不再经过剩余过滤器。-->
+            <!--排除ERROR-->
+            <!--<ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>-->
+            <!-- 输出样式格式 -->
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
+            <Policies>
+                <!--<OnStartupTriggeringPolicy />-->
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${mlog.file.size}"/>
+            </Policies>
+            <!-- 当日志数量超过max会将最老的日志包(配合 filePattern)删除 -->
+            <DefaultRolloverStrategy max="${mlog.file.count}">
+                <Delete basePath="${mlog.dir}/" maxDepth="2">
+                    <IfFileName glob="*.log.zip" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- 异常日志文件，按天或者按照大小分割 -->
+        <RollingFile fileName="${mlog.error.file}" filePattern="${mlog.error.file.pattern}" name="mlog_error">
+            <!-- 记录ERROR级别 -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
+            <Policies>
+                <!--<OnStartupTriggeringPolicy />-->
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${mlog.error.file.size}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${mlog.error.file.count}">
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- 定时任务日志文件，按天或者按照大小分割 -->
+        <RollingFile fileName="${mlog.schedule.file}" filePattern="${mlog.schedule.file.pattern}" name="schedule">
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}"/>
+            <Policies>
+                <!--<OnStartupTriggeringPolicy />-->
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${mlog.file.size}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${mlog.file.count}"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+
+        <!-- 默认Root logger 采用异步 -->
+        <AsyncRoot includeLocation="true" level="${root.level}">
+            <!--AppenderRef：Root的子节点，用来指定该日志输出到哪个Appender.-->
+            <!--<AppenderRef ref="schedule"/>-->
+            <AppenderRef ref="mlog"/>
+            <AppenderRef ref="mlog_error"/>
+            <AppenderRef ref="Console"/>
+        </AsyncRoot>
+        <AsyncLogger name="schedule" includeLocation="true" level="${root.level}" additivity="false">
+            <AppenderRef ref="schedule"/>
+        </AsyncLogger>
+
+        <!-- 配置异步 userAction logger  -->
+
+        <!--同步方式，root只能由1个-->
+        <!--<root level="all">-->
+        <!--<appender-ref ref="Console"/>-->
+        <!--<appender-ref ref="mlog"/>-->
+        <!--<appender-ref ref="mlog_error"/>-->
+        <!--</root>-->
+
+        <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。
+        level:日志输出级别，共有8个级别，按照从低到高为：All < Trace < Debug < Info < Warn < Error < Fatal < OFF.
+        name:用来指定该Logger所适用的类或者类所在的包全路径,继承自Root节点.
+        AppenderRef：Logger的子节点，用来指定该日志输出到哪个Appender,如果没有指定，就会默认继承自Root.如果指定了，那么会在指定的这个Appender和Root的Appender中都会输出，此时我们可以设置Logger的additivity="false"只在自定义的Appender中进行输出。-->
+        <Logger level="info" name="org.springframework"/>
+    </Loggers>
+</Configuration>
