@@ -20,6 +20,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private A a;
+
+    @Autowired
+    private C c;
+
     @ResponseBody
     @RequestMapping(value = "/add", produces = {"application/json;charset=UTF-8"})
     public int addUser(User user){
@@ -28,7 +34,10 @@ public class UserController {
     
     @ResponseBody
     @RequestMapping(value = "", produces = {"application/json;charset=UTF-8"})
-    public User getUser(@RequestParam("userId") Integer userId) {
+    public User getUser(@RequestParam("userId") Integer userId)
+    {
+        a.say();
+        c.say();
         return userService.getUserById(userId);
     }
 }

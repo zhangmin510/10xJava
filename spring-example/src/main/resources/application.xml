@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="customizedBean"
+          class="name.zhangmin.spring.bean.CustomizedBean">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <!-- CommonAnnotationBeanPostProcessor这个BeanPostProcessor通过继承
+    InitDestroyAnnotationBeanPostProcessor对@javax.annotation.PostConstruct
+    和@javax.annotation.PreDestroy注解的支持
+    -->
+    <bean id="commonAnnotationBeanPostProcessor"
+          class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor">
+    </bean>
+
+    <bean class="name.zhangmin.spring.bean.InstantiationTracingBeanPostProcessor"></bean>
+
+</beans>
